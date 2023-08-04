@@ -338,21 +338,18 @@ export default {
             <i class="fa-solid fa-pencil"></i>
           </button>
 
-          <div class="btn-group delete-img">
 
-
-</div>
           <button  title="Elimina Appartamento" class="btn t4-btn btn-add" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-trash"></i>
           </button>
 
 
-<ul class="dropdown-menu">
-<li @click="deleteApartment(this.apartment.id)" class="dropdown-item py-0 text-center">
-    Elimina
-</li>
+          <ul class="dropdown-menu">
+          <li @click="deleteApartment(this.apartment.id)" class="dropdown-item py-0 text-center">
+              Elimina
+          </li>
 
-</ul>
+          </ul>
         </div>
       </div>
 

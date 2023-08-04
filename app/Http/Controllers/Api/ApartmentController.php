@@ -135,6 +135,7 @@ class ApartmentController extends Controller
   public function getMostViewed(){
     $mostViewedIDs = DB::select("SELECT `apartment_id`, COUNT(*) as 'num_views'
     FROM `views`
+    WHERE `apartment_id` <> 'null'
     GROUP BY(`apartment_id`)
     ORDER BY `num_views` DESC
     LIMIT 10;");
