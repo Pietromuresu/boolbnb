@@ -37,6 +37,7 @@ Route::middleware(['auth', 'verified'])
     Route::get('/{user_id}', [ApartmentController::class, 'getUserApartments']);
     Route::get('/apartment/{slug}', [ApartmentController::class, 'getApartmentDetail']);
     Route::post('/image',[ ImageController::class, 'store']);
+    Route::delete('/image/{id}',[ ImageController::class, 'destroy']);
     Route::post('/sponsorize/{apartmentId}/{sponsorshipId}', [AdminApartmentController::class, 'sponsorizeApartment'] );
     Route::get('/last-sponsorship/{apartmentId}', [AdminApartmentController::class, 'getLastActiveSponsorship']);
   });

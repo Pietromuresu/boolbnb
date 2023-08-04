@@ -25,4 +25,14 @@ class ImageController extends Controller
       return response()->json($form_data);
 
     }
+
+    public function destroy($id)
+    {
+      $image = Image::where('id', $id)->first();
+      if($image->img_path){
+        Storage::disk('public')->delete($image->img_path);
+      }
+
+      $image->delete();
+    }
 }

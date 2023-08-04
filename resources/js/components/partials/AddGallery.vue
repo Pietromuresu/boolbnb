@@ -36,7 +36,7 @@ export default {
           }
         } )
         .then(result=>{
-
+          this.$emit('getApi');
         })
 
       })

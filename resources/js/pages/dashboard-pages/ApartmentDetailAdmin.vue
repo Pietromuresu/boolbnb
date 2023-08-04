@@ -347,7 +347,7 @@ export default {
         <div class="col-12 col-xl-6 pe-lg-4">
           <div class="img-wrapper">
             <div class="slider-container mb-3">
-              <Slider :apartment="this.apartment" :gallery="this.gallery" />
+              <Slider :apartment="this.apartment" :gallery="this.gallery" :isAdmin="true" @getApi="this.getApi()"/>
             </div>
             <div class="price">
               <p><span class="fw-semibold fs-4">{{ apartment.price }} &euro;</span> a notte</p>
@@ -404,7 +404,7 @@ export default {
 
           <hr>
 
-          <AddGallery :apartment="this.apartment"/>
+          <AddGallery :apartment="this.apartment" @getApi="this.getApi()"/>
 
 
         </div>

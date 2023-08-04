@@ -1,4 +1,6 @@
 <script>
+
+
   // Import Swiper Vue.js components
   import { Swiper, SwiperSlide } from 'swiper/vue';
 
@@ -12,6 +14,8 @@
 
   // import required modules
   import { Pagination, Navigation } from 'swiper/modules';
+import axios from 'axios';
+import { store } from '../../store/store';
 
   export default {
     components: {
@@ -20,13 +24,26 @@
     },
     props: {
       apartment: Object,
-      gallery: Array
+      gallery: Array,
+      isAdmin: Boolean,
     },
     setup() {
       return {
         modules: [Pagination, Navigation],
       };
     },
+
+    methods: {
+      deleteImg(id){
+        axios.get('sanctum/csrf-cookie')
+        .then(() => {
+          axios.delete(store.adminUrl + 'image/' + id)
+            .then(result => {
+              this.$emit('getApi');
+            })
+        })
+      }
+    }
   };
 </script>
 <template>
@@ -43,9 +60,13 @@
   >
     <swiper-slide>
       <img class="w-100" :src="apartment.img_path ? apartment.img_path : '/img/house-placeholder.png'" alt="">
+
     </swiper-slide>
     <swiper-slide v-for="photo in this.gallery" :key="photo.id">
       <img class="w-100" :src="photo.img_path ? photo.img_path : '/img/house-placeholder.png'" alt="">
+      <div v-if="isAdmin" @click="deleteImg(photo.id)" class="delete-img">
+        <i class="fa-solid fa-trash"></i>
+      </div>
     </swiper-slide>
   </swiper>
 </template>
@@ -103,6 +124,18 @@ body {
   height: 100%;
 
 }
+}
+
+.delete-img{
+  padding: 3px 8px;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  &:hover{
+    border: 1px solid rgb(254, 197, 197);
+  }
 }
 
 </style>
