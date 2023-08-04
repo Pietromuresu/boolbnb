@@ -53,7 +53,7 @@ export default {
   }
 .jumbotron {
   position: relative;
-  height: calc(100vh - 70px);
+  height: calc(70vh - 70px);
   overflow: hidden;
   box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.15);
 

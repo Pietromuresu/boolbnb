@@ -1,4 +1,8 @@
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import axios from 'axios';
 import Jumbotron from '../components/partials/Jumbotron.vue';
 import Footer from '../components/partials/Footer.vue';
@@ -9,10 +13,14 @@ import { store } from '../store/store';
 export default {
   name: 'Home',
 
+
+
   components: {
     Jumbotron,
     ApartmentCard,
     Footer,
+    Swiper,
+    SwiperSlide,
     Loader
 
   },
@@ -74,14 +82,20 @@ export default {
           <Loader/>
         </div>
 
-        <div v-else class="row">
-          <div v-for="apartment in store.sponsorizedApartments" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3">
-            <ApartmentCard
-              :apartment="apartment"
-              :link_name="'apartment-detail-guest'"
-              @click="getView(apartment.id)"
-              />
-          </div>
+        <div v-else class="swiper-container">
+
+
+            <swiper :slides-per-view="6">
+              <SwiperSlide v-for="apartment in store.sponsorizedApartments" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3" >
+
+                <ApartmentCard
+                :apartment="apartment"
+                :link_name="'apartment-detail-guest'"
+                @click="getView(apartment.id)"
+                />
+              </SwiperSlide>
+            </swiper>
+
         </div>
 
       </div>
@@ -97,6 +111,14 @@ export default {
 .home {
   color: $dark_gray;
   background-color: $dark_white;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiper-wrapper{
+  width: 100%;
 }
 
 </style>
