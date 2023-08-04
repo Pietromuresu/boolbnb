@@ -337,9 +337,22 @@ export default {
           <button @click="store.showSuggestions = false" title="Modifica Appartamento" class="btn t4-btn btn-add me-2" data-bs-toggle="modal" data-bs-target="#edit-apartment-modal">
             <i class="fa-solid fa-pencil"></i>
           </button>
-          <button @click="deleteApartment(this.apartment.id)" title="Elimina Appartamento" class="btn t4-btn btn-add" data-bs-toggle="modal" data-bs-target="">
+
+          <div class="btn-group delete-img">
+
+
+</div>
+          <button  title="Elimina Appartamento" class="btn t4-btn btn-add" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-trash"></i>
           </button>
+
+
+<ul class="dropdown-menu">
+<li @click="deleteApartment(this.apartment.id)" class="dropdown-item py-0 text-center">
+    Elimina
+</li>
+
+</ul>
         </div>
       </div>
 
@@ -424,6 +437,7 @@ export default {
 
     </div>
   </div>
+
 
 <!-- modal -->
 <div class="modal fade" id="edit-apartment-modal" tabindex="-1" aria-hidden="true">

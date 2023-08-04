@@ -56,7 +56,8 @@ import { store } from '../../store/store';
     }"
     :navigation="true"
     :modules="modules"
-    class="mySwiper"
+    class="mySwiper "
+
   >
     <swiper-slide>
       <img class="w-100" :src="apartment.img_path ? apartment.img_path : '/img/house-placeholder.png'" alt="">
@@ -64,9 +65,29 @@ import { store } from '../../store/store';
     </swiper-slide>
     <swiper-slide v-for="photo in this.gallery" :key="photo.id">
       <img class="w-100" :src="photo.img_path ? photo.img_path : '/img/house-placeholder.png'" alt="">
-      <div v-if="isAdmin" @click="deleteImg(photo.id)" class="delete-img">
-        <i class="fa-solid fa-trash"></i>
-      </div>
+      <!-- Trash Modal -->
+
+
+    <!-- Button trigger modal -->
+
+
+
+<!-- Example single danger button -->
+<div class="btn-group delete-img">
+
+    <div v-if="isAdmin" data-bs-toggle="dropdown" aria-expanded="false">
+     <i class="fa-solid fa-trash"></i>
+    </div>
+
+  <ul class="dropdown-menu">
+    <li @click="deleteImg(photo.id)" class="dropdown-item py-0 text-center">
+        Elimina
+    </li>
+
+  </ul>
+</div>
+
+
     </swiper-slide>
   </swiper>
 </template>
