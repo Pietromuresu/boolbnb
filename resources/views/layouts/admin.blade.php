@@ -13,9 +13,7 @@
     <title>BoolBnB</title>
 
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
 
     <!-- Usando Vite -->
     @vite(['resources/scss/admin.scss', 'resources/js/admin.js'])
@@ -25,6 +23,11 @@
 
     {{-- Chart.js --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,700;1,400;1,500&display=swap" rel="stylesheet">
 
 </head>
 
