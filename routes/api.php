@@ -28,6 +28,7 @@ Route::namespace('Api')
   Route::get('/services', [ApartmentController::class, 'getServices']);
   Route::get('/{min_price}/{max_price}/{min_square_meters}/{min_bathrooms}/{min_beds}/{min_rooms}/{id}/{address}/{radiusInMeters}', [ApartmentController::class, 'getFilteredApartmentsWithServicesAndRadius']);
   Route::get('/{min_price}/{max_price}/{min_square_meters}/{min_bathrooms}/{min_beds}/{min_rooms}/{address}/{radiusInMeters}', [ApartmentController::class, 'getFilteredApartmentsWithoutServices']);
+  Route::get('/most-viewed', [ApartmentController::class, 'getMostViewed']);
 });
 
 Route::resource('/message', MessageController::class);

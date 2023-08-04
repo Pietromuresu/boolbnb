@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\CustomHelper;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\View;
 
 
 
@@ -127,6 +128,24 @@ class ApartmentController extends Controller
 
     return response()->json(compact('apartments'));
 
+  }
+
+  // Get most viewed
+
+  public function getMostViewed(){
+    $mostViewedIDs = DB::select("SELECT `apartment_id`, COUNT(*) as 'num_views'
+    FROM `views`
+    GROUP BY(`apartment_id`)
+    ORDER BY `num_views` DESC
+    LIMIT 10;");
+  $mostViewedApartments = [];
+
+  forEach($mostViewedIDs as $apartment){
+    $mostViewedApartments[] = Apartment::where('id', $apartment->apartment_id)->first()->makeHidden('coordinates');
+  }
+
+
+    return response()->json(compact('mostViewedApartments'));
   }
 
 }

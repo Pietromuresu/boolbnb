@@ -28,7 +28,8 @@ export default {
   data() {
     return {
       store,
-      loading: true
+      loading: true,
+      mostViewed: null,
     }
   },
 
@@ -48,6 +49,8 @@ export default {
           this.loading = false;
         })
       },
+
+
     getView(apartment_id) {
       axios.get('https://api.ipify.org/?format=json')
       .then(response => {
@@ -60,19 +63,33 @@ export default {
 
       })
 
+    },
+
+
+    getMostViewed(){
+      this.mostViewed = null
+      axios.get(store.apiUrl + 'apartments/most-viewed')
+            .then(response => {
+              this.mostViewed = response.data.mostViewedApartments
+
+            })
     }
   },
 
   mounted() {
     this.getApi();
+    this.getMostViewed();
   }
 }
 </script>
 
 <template>
   <div class="home">
+
+    <!-- Jumbotron -->
     <Jumbotron/>
 
+    <!-- Appartamenti in evidenza -->
     <section class="sponsorized-apartments pb-4">
       <div class="t4-container">
 
@@ -83,8 +100,6 @@ export default {
         </div>
 
         <div v-else class="swiper-container">
-
-
             <swiper :slides-per-view="6">
               <SwiperSlide v-for="apartment in store.sponsorizedApartments" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3" >
 
@@ -95,13 +110,39 @@ export default {
                 />
               </SwiperSlide>
             </swiper>
+        </div>
 
+      </div>
+
+    <!-- Appartamenti più visti -->
+
+      <div class="t4-container">
+
+        <h2 class="mt-5 mb-4 text-center text-md-start fw-semibold">I 10 più visti</h2>
+
+        <div v-if="this.loading" class="d-flex justify-content-center py-5 my-5">
+          <Loader/>
+        </div>
+
+        <div v-else class="swiper-container">
+            <swiper :slides-per-view="6">
+              <SwiperSlide v-for="apartment in this.mostViewed" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3" >
+
+                <ApartmentCard
+                :apartment="apartment"
+                :link_name="'apartment-detail-guest'"
+                @click="getView(apartment.id)"
+                />
+              </SwiperSlide>
+            </swiper>
         </div>
 
       </div>
     </section>
 
   </div>
+
+  <!-- Footer -->
   <Footer />
 </template>
 
