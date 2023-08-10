@@ -45,11 +45,17 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
+    transition: 1s;
     overflow: hidden;
     aspect-ratio: 1;
+    &:hover{
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
 
     &:hover img {
       transform: scale(1.05);
+
     }
 
     img {

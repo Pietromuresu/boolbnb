@@ -78,8 +78,10 @@ export default {
         this.message = response.data.message;
         store.sponsorizeApartment(this.$route.params.apartmentId)
         const invia = document.getElementById('invia')
-      invia.style.display = 'block'
-        this.$router.push('/my-apartments/sponsorships')
+        invia.style.display = 'block'
+        store.sponsorshipId = this.$route.params.id
+        store.apartmentId = this.$route.params.apartmentId
+        this.$router.push( '/checkout/result')
       })
     }
   },
@@ -95,10 +97,6 @@ export default {
 
 <div class="checkout">
   <div v-show="!loading" class="t4-container w-50 mx-auto mt-5">
-    <div v-if="transactionMessage !== null" class="alert alert-success " :class="{'alert-danger' : this.transactionMessage.includes('Ops')}" role="alert">
-      {{ this.transactionMessage }}
-    </div>
-
 
     <div v-if="this.message">
       {{ this.message }}
@@ -108,7 +106,6 @@ export default {
       <div id="dropin-container" class="w-50 mx-auto"></div>
 
       <div class="w-50 mx-auto">
-
         <input id="invia" type="submit" class="btn t4-btn w-100" />
         <input type="hidden" id="nonce" name="payment_method_nonce" />
       </div>

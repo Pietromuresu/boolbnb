@@ -143,7 +143,9 @@ class ApartmentController extends Controller
    */
   public function show($id)
   {
-    //
+    $apartment = Apartment::find($id)->makeHidden('coordinates');
+
+    return response()->json($apartment);
   }
 
   /**

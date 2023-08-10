@@ -48,7 +48,9 @@ class SponsorshipController extends Controller
      */
     public function show($id)
     {
-        //
+        $sponsorship = Sponsorship::find($id);
+
+        return response()->json($sponsorship);
     }
 
     /**

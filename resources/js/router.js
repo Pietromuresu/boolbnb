@@ -9,6 +9,7 @@ import DashboardStats from './pages/dashboard-pages/DashboardStats.vue'
 import DashboardSponsorships from './pages/dashboard-pages/DashboardSponsorships.vue'
 import ApartmentDetailAdmin from './pages/dashboard-pages/ApartmentDetailAdmin.vue'
 import ApartmentDetailGuest from './pages/ApartmentDetailGuest.vue'
+import CheckoutResponse from './pages/checkout-response.vue'
 import Checkout from './pages/Checkout.vue'
 import Error404 from './pages/Error404.vue'
 import { store } from './store/store'
@@ -82,7 +83,16 @@ const router = createRouter({
             path: '/checkout/:apartmentId/:id',
             name: 'Checkout',
             component: Checkout,
-        },
+
+
+
+
+          },
+          {
+            path: '/checkout/result',
+            name: 'CheckoutResponse',
+            component: CheckoutResponse,
+          },
 
         {
             path: '/:pathMatch(.*)*',
