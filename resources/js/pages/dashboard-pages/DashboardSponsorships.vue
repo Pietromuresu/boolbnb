@@ -56,16 +56,16 @@ export default {
 </script>
 
 <template>
-  <div class="t4-container py-0 px-0 py-md-5 px-md-5">
-    <h2 class="fs-3 fw-semibold my-4 title">Sponsorizzazioni</h2>
+  <div class="t4-container w-100 py-0 px-0 py-md-5 px-md-5">
+    <h2 class="fs-3 fw-semibold my-4 title text-center">Sponsorizzazioni</h2>
 
 
     <div v-if="this.loading" class="d-flex justify-content-center py-5 my-5">
       <Loader/>
     </div>
 
-    <div v-else class="row row-cols-12 row-cols-lg-2 row-cols-xxl-3 mt-4">
-      <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
+    <div v-else class="row w-100 justify-content-center  mt-4 " >
+      <div class="col-lg-3 ms-3 pm-card" v-for="sponsorship in sponsorships" :key="sponsorship.id">
         <SponsorshipCard :sponsorship="sponsorship"/>
 
         <div class="modal fade" id="apartments-modal" tabindex="-1" aria-hidden="true">
@@ -104,6 +104,11 @@ export default {
   color: $dark-gray;
 }
 
+
+.pm-card{
+  min-width: 320px;
+
+}
 .t4-modal-body {
   background-color: $dark-white;
   height: 500px;

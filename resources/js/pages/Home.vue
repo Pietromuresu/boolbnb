@@ -30,6 +30,9 @@ export default {
       store,
       loading: true,
       mostViewed: null,
+      swiperWrap: true,
+      window: window.innerWidth,
+      windowHeight: 0
     }
   },
 
@@ -64,6 +67,10 @@ export default {
       })
 
     },
+    onResize() {
+      this.windowHeight = window.innerWidth
+    },
+
 
 
     getMostViewed(){
@@ -76,10 +83,26 @@ export default {
     }
   },
 
+
+  watch: {
+    windowHeight(newValue)  {
+        if(newValue >= 850){
+          this.swiperWrap = true
+        }else {
+          this.swiperWrap = false
+        }
+      }
+    },
+
+
   mounted() {
     this.getApi();
     this.getMostViewed();
-  }
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    })
+
+  },
 }
 </script>
 
@@ -100,6 +123,8 @@ export default {
         </div>
 
         <div v-else class="swiper-container">
+          <div v-if="swiperWrap == true">
+
             <swiper :slides-per-view="6">
               <SwiperSlide v-for="apartment in store.sponsorizedApartments" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3" >
 
@@ -110,6 +135,16 @@ export default {
                 />
               </SwiperSlide>
             </swiper>
+          </div>
+          <div v-else>
+            <div v-for="apartment in store.sponsorizedApartments" :key="apartment.id">
+              <ApartmentCard
+              :apartment="apartment"
+              :link_name="'apartment-detail-guest'"
+              @click="getView(apartment.id)"
+              />
+            </div>
+          </div>
         </div>
 
       </div>
@@ -124,17 +159,26 @@ export default {
           <Loader/>
         </div>
 
-        <div v-else class="swiper-container">
-            <swiper :slides-per-view="6">
-              <SwiperSlide v-for="apartment in this.mostViewed" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3" >
+         <div v-else class="swiper-container">
+            <div v-if="swiperWrap == true">
+              <swiper :slides-per-view="6">
+                <SwiperSlide v-for="apartment in this.mostViewed" :key="apartment.id" class="col-12 col-md-4 col-lg-2 px-4 px-md-3" >
+                  <ApartmentCard
+                  :apartment="apartment"
+                  :link_name="'apartment-detail-guest'"
+                  @click="getView(apartment.id)"
+                  />
+                </SwiperSlide>
+              </swiper>
+            </div>
 
-                <ApartmentCard
-                :apartment="apartment"
-                :link_name="'apartment-detail-guest'"
-                @click="getView(apartment.id)"
-                />
-              </SwiperSlide>
-            </swiper>
+            <div v-else v-for="apartment in store.sponsorizedApartments" :key="apartment.id">
+              <ApartmentCard
+              :apartment="apartment"
+              :link_name="'apartment-detail-guest'"
+              @click="getView(apartment.id)"
+              />
+            </div>
         </div>
 
       </div>
@@ -156,6 +200,7 @@ export default {
 
 .swiper {
   width: 100%;
+
 }
 
 .swiper-wrapper{

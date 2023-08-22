@@ -40,7 +40,7 @@ export default {
 
 aside {
   height: 100%;
-  min-width: 280px;
+  min-width: 210px;
   background-color: $dark_gray;
 
   li {
