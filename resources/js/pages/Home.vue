@@ -77,6 +77,14 @@ export default {
             })
     },
 
+    handleSwiper(){
+      if(window.innerWidth >= 850){
+        this.swiperWrap = true
+      }else {
+        this.swiperWrap = false
+      }
+    },
+
     onResize() {
       this.windowHeight = window.innerWidth
     },
@@ -100,6 +108,7 @@ export default {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
     })
+    this.handleSwiper()
 
   },
 

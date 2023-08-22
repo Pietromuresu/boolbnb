@@ -45,10 +45,10 @@ export default {
               <li class="nav-item" @click="store.suggestions = null">
                 <router-link  :to="{ name: 'home' }" class="nav-link fw-semibold">Home</router-link>
               </li>
-              <li class="nav-item" @click="store.suggestions = null">
+              <li v-if="store.searchedApartments !== null" class="nav-item" @click="store.suggestions = null">
                 <router-link  :to="{ name: 'advanced-search' }"  class="nav-link fw-semibold">Ricerca Avanzata</router-link>
               </li>
-              <li v-if="store.user" class="nav-item" @click="store.showSuggestions = false">
+              <li v-if="store.user" class="nav-item d-none" @click="store.showSuggestions = false">
                 <router-link  :to="{ name: 'apartments' }"  class="nav-link fw-semibold">Gestione Appartamenti</router-link>
               </li>
               <li class="nav-item log-btn">
@@ -82,7 +82,7 @@ export default {
             <li class="header-menu-item me-4" @click="store.showSuggestions = false">
               <router-link :to="{ name: 'home' }" class="nav-link fw-semibold">Home</router-link>
             </li>
-            <li class="header-menu-item me-4" @click="store.showSuggestions = false">
+            <li v-if="store.searchedApartments !== null" class="header-menu-item me-4" @click="store.showSuggestions = false">
               <router-link :to="{ name: 'advanced-search' }" class="nav-link fw-semibold">Ricerca Avanzata</router-link>
             </li>
             <li v-if="store.user" class="header-menu-item" @click="store.showSuggestions = false">
