@@ -67,11 +67,6 @@ export default {
       })
 
     },
-    onResize() {
-      this.windowHeight = window.innerWidth
-    },
-
-
 
     getMostViewed(){
       this.mostViewed = null
@@ -80,7 +75,11 @@ export default {
               this.mostViewed = response.data.mostViewedApartments
 
             })
-    }
+    },
+
+    onResize() {
+      this.windowHeight = window.innerWidth
+    },
   },
 
 
@@ -102,6 +101,10 @@ export default {
       window.addEventListener('resize', this.onResize);
     })
 
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize);
   },
 }
 </script>
