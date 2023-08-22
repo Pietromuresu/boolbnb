@@ -83,6 +83,11 @@ export default {
         store.apartmentId = this.$route.params.apartmentId
         this.$router.push( '/checkout/result')
       })
+      .catch(error => {
+        if(error.length !== 0){
+          alert('Transazione non completata correttamente! :(')
+        }
+      })
     }
   },
 
